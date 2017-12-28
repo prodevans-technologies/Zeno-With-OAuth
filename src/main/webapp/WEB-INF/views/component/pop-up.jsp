@@ -10,6 +10,7 @@
 {
 	padding-top: 18px;
 }
+						
 /*Floating button*/
 #floating-button
 {
@@ -33,6 +34,43 @@
     cursor: pointer;
     box-shadow: 0px 2px 5px #c9c3c3;
 }
+
+#parental_control_off
+{
+    width: 60px;
+    height: 60px;
+    
+    color:black;
+/*    background-image: url('/zeno/img/icons/redsheild.png');*/
+ background-image: url('/zeno/img/icons/sheild_round_red_sm.png');
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: right top;
+    position: fixed;    
+    top: 190px;
+    cursor: pointer;
+/*    right: 2.35% !important;*/
+}
+
+#parental_control_on
+{
+    width: 60px;
+    height: 60px;
+    
+    
+/*    background-image: url('/zeno/img/icons/greensheild.png');*/
+ background-image: url('/zeno/img/icons/sheild_round_green_sm.png');
+    background-size: 60px;
+    background-repeat: no-repeat;
+    background-position: right top;
+    position: fixed;
+    top: 190px;
+    cursor: pointer;
+/*    right: 2.35% !important;*/
+}
+
+
+
 .fv
 {
 	color:white;
@@ -71,6 +109,17 @@
 		top:210px !important;
 		right: 2% !important;
 	}
+/*        Indicator-Light*/
+        #parental_control_off
+	{
+		top:110px !important;
+		right: 2% !important;
+	}
+        #parental_control_on
+	{
+		top:110px !important;
+		right: 2% !important;
+	}
 }
 @media (max-width : 730px) 
 {
@@ -91,6 +140,18 @@
 	{
 	    width: 45px;
 	    height: 45px;
+	}
+        #parental_control_off
+	{
+	    width: 50px;
+	    height: 50px;
+            background-size: 50px;
+	}
+        #parental_control_on
+	{
+	    width: 50px;
+	    height: 50px;
+            background-size: 50px;
 	}
 	.pt-18
 	{
@@ -119,6 +180,20 @@
 	    height: 45px;
 	    top: 310px;
 	}
+        #parental_control_off
+	{
+	    width: 50px;
+	    height: 50px;
+            background-size: 50px;
+	    top: 190px;
+	}
+        #parental_control_on
+	{
+	    width: 50px;
+	    height: 50px;
+            background-size: 50px;
+	    top: 190px;
+	}
 	.pt-18
 	{
 		padding-top: 12px;
@@ -146,6 +221,20 @@
 	    height: 55px;
 	    top: 330px;
 	}
+        #parental_control_off
+	{
+	    width: 60px;
+	    height: 60px;
+            background-size: 60px;
+	    top: 190px;
+	}
+        #parental_control_on
+	{
+	    width: 60px;
+	    height: 60px;
+            background-size: 60px;
+	    top: 190px;
+	}
 	.pt-18
 	{
 		padding-top: 16px;
@@ -159,8 +248,36 @@
 		right: 2.4% !important;
 	}
 }
+.floating-light-font
+{
+    color: black;
+    font-size: 10px !important;
+    line-height: 0px !important;
+    align-content: center;
+}
 </style>
 
+
+
+<a href="${pageContext.request.contextPath }/control">
+    <div id="container-floating">
+        <div id="parental_control_on" data-toggle="tooltip" class="floatingRight" title="SURF SAFE: ON">
+<!--            <h6 class="fv pt-18 floating-light-font"  >SURF</h6>
+            <h6 class="fv floating-light-font"  >SAFE</h6>  -->
+        </div>
+    </div>
+</a>
+    
+ <a href="${pageContext.request.contextPath }/control">
+    <div id="container-floating">
+        <div id="parental_control_off" data-toggle="tooltip" class="floatingRight" title="SURF SAFE: OFF">
+<!--            <h6 class="fv pt-18 floating-light-font"  " >SURF</h6>
+            <h6 class="fv floating-light-font"  >SAFE</h6>  -->
+        </div>
+    </div>
+</a>
+
+    
 <a href="${pageContext.request.contextPath }/topup">
 	<div id="container-floating"> 		
     	<div id="floating-button" data-toggle="tooltip" class="floatingRight">
@@ -178,6 +295,8 @@
         </div>
     </div>
 </a>
+
+
 
 
 

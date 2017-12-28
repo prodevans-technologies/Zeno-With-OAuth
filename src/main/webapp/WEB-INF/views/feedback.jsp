@@ -36,6 +36,15 @@ input[type="text"]
 		padding-left: 3% !important;
 	}
 }
+#myAlert{
+                color: blue;
+                position: absolute;
+               	bottom: 30px;
+                left: 350px;
+                font-size:16px;
+                background-color: #fff;
+                border: 1px #008000 solid;
+         }
 </style>
 
 <body class="corporate">
@@ -75,7 +84,7 @@ input[type="text"]
 		        
 		        <div class="row pb-40">
 		            <div class="col-md-12">
-		                <form:input path="subject" type="text" id="subject" placeholder="Subject" required="true" style="width:99% !important;"/>
+		                <form:input path="subject" type="text" id="subject"  placeholder="Subject" required="required" style="width:99% !important;"/>
 		            </div>
 		        </div>
 		                   
@@ -84,7 +93,7 @@ input[type="text"]
 		        <div class="row">
 		        	<!--<h3 style="padding-left: 1%;" class="plForMobile">Comment</h3>-->
 		            <div class="col-md-12">
-		                <form:textarea path="message" id="message" style="height:30%; width:99%; border: 0.6px solid #bdc3c7; resize: none; color:black; border-radius: 0.4px;font-size: 16px;" placeholder="Comment" />
+		                <form:textarea path="message" id="message" required="required" style="height:30%; width:99%; border: 0.6px solid #bdc3c7; resize: none; color:black; border-radius: 0.4px;font-size: 16px;" placeholder="Comment" />
 		            </div>
 		             <div class="col-md-12" style="margin-top:3% ;text-align: right;margin-left: -1%;">
 						<button id="fsendnow" class="btn billButton"  type="submit">SEND NOW</button>
@@ -95,9 +104,14 @@ input[type="text"]
 		     
     </div>
     
-    <h3 style="color:green; text-align: center;"><b>
-<c:if test="${ not empty msg}">${msg}</c:if></b></h3>
-</div>    
+    <!-- pop up message for response message -->
+   <c:if test="${not empty msg }">
+            <div id="myAlert" class="alert alert-danger">
+                <a href="${pageContext.request.contextPath }/feedbackPage" class="close">&times;</a>
+            <c:out value="${msg }"></c:out>
+            </div>
+        </c:if>
+        
 
 		<jsp:include page="component/pop-up.jsp"></jsp:include>
            

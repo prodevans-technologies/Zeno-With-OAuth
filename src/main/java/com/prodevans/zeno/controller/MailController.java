@@ -59,9 +59,10 @@ public class MailController
 	}
 	
 	@RequestMapping(value = "/feedbackRequestPage", method = RequestMethod.POST)
-	public String feedbackRequest(ModelMap model, HttpSession session,@ModelAttribute(name="feedbackDetails")SendMailDetails feedback) throws XmlRpcException 
+	public String feedbackRequest(ModelMap model, HttpSession session,@ModelAttribute(name="feedbackDetails")SendMailDetails feedback,SessionDetails email) throws XmlRpcException 
 	{
-		boolean result=feedbackDAOImpl.sentMailFeedback(feedback);
+		SessionDetails user = (SessionDetails) session.getAttribute("user");
+		boolean result=feedbackDAOImpl.sentMailFeedback(feedback,email);
 		session.setAttribute("successfull", "successfull");
 		return  "redirect:feedbackPage";
 	}
@@ -132,6 +133,15 @@ public class MailController
 	@RequestMapping(value = "/serviceRequestPage", method = RequestMethod.POST)
 	public String serviceRequest(ModelMap model, HttpSession session,@ModelAttribute(name="serviceRequestDetails")ServiceRequest serviceRequest) throws XmlRpcException 
 	{
+		SessionDetails user = (SessionDetails) session.getAttribute("user");
+		serviceRequest.setEmail_id(user.getEmail());
+		ServiceRequest request = new ServiceRequest();
+		
+		/*if(request.getRequestCheckboxArray() ==null || request.getComplaintCheckboxArray() ==null) {
+			
+			return  "redirect:service";
+			
+		}*/
 		
 		boolean result=feedbackDAOImpl.sentMailServiceRequest(serviceRequest);
 		session.setAttribute("successfull", "successfull");
@@ -176,6 +186,5 @@ public class MailController
 		
 		return complaint;
 	}
-	
 	
 }

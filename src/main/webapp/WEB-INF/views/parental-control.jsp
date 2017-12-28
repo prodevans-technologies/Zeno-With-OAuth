@@ -56,12 +56,14 @@
                     background-size: 29px 29px;
                     background-repeat: no-repeat;
                     background-position: right top;
-                    width: 195px;
+                    width: 119%;
                     height: 34px;
                     border: none;
                     -moz-appearance: none;
                     -webkit-appearance: none;
                     border-bottom: 2px solid red;
+                    margin-left: -15%;
+                    margin-top: -2%;
 
 
                 }
@@ -145,16 +147,19 @@
 
 
             .time_image {
-                padding: 8px 20px;
+                padding: 6px 20px 8px 20px;
                 background-image: url('/zeno/img/icons/Time_blue.png') !important;
-                background-size: 33px !important;
+                background-size: 62% !important;
                 background-repeat: no-repeat !important;
+                margin: 0px -9px 0px 7px ;              
+                    
             }
             .date_image {
-                padding: 8px 20px;
+                padding: 6px 20px 8px 20px;
                 background-image: url('/zeno/img/icons/Calendar_blue.png') !important;
-                background-size: 33px !important;
+                background-size: 62% !important;
                 background-repeat: no-repeat !important;
+                margin: 0px -9px 0px 7px ;
             }
             .plus_image{
                 padding: 18px 18px;
@@ -201,7 +206,7 @@
                 padding: 15px;
                 font-size: 24px;
             }
-            input[type="checkbox"] + label::before {
+/*            input[type="checkbox"] + label::before {
                 content: '';
                 display: block;
                 width: 25px;
@@ -225,19 +230,19 @@
 
                 -moz-user-select: none;
 
-                width: 100px;
+                width: 13%;
                 padding-top: unset !important;
                 float: left;
-            }
+            }*/
             .ScrollStyle {
 
                 overflow-y: scroll;
                 max-height: 350px;
             }
-            .panel-group  .category_box {
+            .category_box {
 
                 min-height: 100px;
-                padding: 6.5%;
+                padding: 40px;
                 border: 1px solid #bdc3c7;
                 margin-top: -1px;
                 min-height: 350px;
@@ -263,8 +268,8 @@
 
             }*/
             .row{
-                margin-right: unset;
-                margin-left: unset;
+/*                margin-right: unset;
+                margin-left: unset;*/
             }
             .panel {
 
@@ -330,89 +335,23 @@
                 border-radius: 10px;
                 -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
             }
-            @media (max-width: 500px) and (min-width:240px)
+            @media (max-width: 500px) and (min-width: 240px)
             {
-
-                .sumit_aling{
-                 margin-right: -11px;
+                .control-label
+                {
+                    width:100% ! important;
+                    text-align: unset !important;
+                    
                 }
-                
-                .text-right > .botton_aling{
-                margin-right: 13px;
+                #Scheduling_type
+                {
+                    width:118% !important;
+                    margin-left: -11% ;
                 }
-                .nav-tabs > li.active > a#time-tab-name {
-                    color: #716868;
-                    padding: 5px 15px 15px 33px;
-                    border-bottom: 5px red solid !important;
-                    background-image: url('${pageContext.request.contextPath }/img/icons/Time_red.png') !important;
-                    background-size: 30px !important;
-                    background-repeat: no-repeat !important;
-                    font-size: 80% !important;    
-                    width: 90%;
+                #st_Select_type
+                {
+                    margin-left: -3%;
                 }
-
-                .nav-tabs > li > a#time-tab-name {
-                    color: #716868;
-                    padding: 5px 15px 15px 33px;
-                    border-bottom: 5px #fff solid !important;
-                    background-image: url('${pageContext.request.contextPath }/img/icons/Time_grey.png') !important;
-                    background-size: 30px !important;
-                    background-repeat: no-repeat !important;
-                    font-size: 80% !important;     
-                    width: 90%;
-                }
-                .nav-tabs > li.active > a#day-tab-name {
-                    color: #716868;
-                    padding: 5px 15px 15px 33px;
-                    border-bottom: 5px red solid !important;
-                    background-image: url('${pageContext.request.contextPath }/img/icons/Day_red.png') !important;
-                    background-size: 30px !important;
-                    background-repeat: no-repeat !important;
-                    font-size: 80% !important;   
-                    width: 90%;
-                }
-
-                .nav-tabs > li > a#day-tab-name {
-                    color: #716868;
-                    padding: 5px 15px 15px 33px;
-                    border-bottom: 5px #fff solid !important;
-                    background-image: url('${pageContext.request.contextPath }/img/icons/Day_grey.png') !important;
-                    background-size: 30px !important;
-                    background-repeat: no-repeat !important;
-                    font-size: 80% !important;   
-                    width: 90%;
-                }
-
-                .nav-tabs > li.active > a#dates-tab-name {
-                    color: #716868;
-                    padding: 5px 15px 15px 33px;
-                    border-bottom: 5px red solid !important;
-                    background-image: url('${pageContext.request.contextPath }/img/icons/Dates_red.png') !important;
-                    background-size: 30px !important;
-                    background-repeat: no-repeat !important;
-                   font-size: 80% !important;   
-                    width: 90%;
-                }
-
-                .nav-tabs > li > a#dates-tab-name {
-                    color: #716868;
-                    padding: 5px 15px 15px 33px;
-                    border-bottom: 5px #fff solid !important;
-                    background-image: url('${pageContext.request.contextPath }/img/icons/Dates_grey.png') !important;
-                    background-size: 30px !important;
-                    background-repeat: no-repeat !important;
-                    font-size: 80% !important;    
-                    width: 90%;
-                }
-                .control-label{
-                margin-bottom: -13px;
-                padding-left: unset;
-                }
-              
-
-
-               
-
             }
         </style>
     </head>
@@ -465,238 +404,105 @@
 
             <div class="panel-group">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="panel-title" id="collapser">
-                            <span id="schedule" style="font-size: 24px;">SCHEDULE</span> <span id="schedule_images" class="plus_image" style="float: right; " data-toggle="collapse" href="#collapse1"></span>
+                    
+                    <!-- Start of the Pop up content-->
+<!--                    <div class="form-group col-md-6">
+                        <label for="date-time-start" class="col-md-3 control-label">Start Time</label>
+                        <div class="input-group date  col-md-7" data-date="" >
+                            <input name="dates_start_time" class="form-control form_time" id="date-time-start" size="16" type="text" value=""  required="required" >
+
+                            <span class="input-group-addon"><span class="time_image form_time" data-date-format="hh:ii" data-link-field="date-time-start" data-link-format="hh:ii"></span></span>
                         </div>
-                    </div>
-                    <div id="collapse1" class="panel-collapse collapse in " aria-expanded="true" <c:choose><c:when test="${not empty day_msg || not empty date_msg || not empty time_msg}">style="display: block;"</c:when><c:otherwise>style="display: none;"</c:otherwise> </c:choose>  >
-                                <div class="panel-body">
-                                    <ul class="nav nav-tabs  margin-top-10">
-                                <c:choose>
-                                    <c:when test="${not empty time_msg }">
-                                        <li class=" active"><a id="time-tab-name" data-toggle="tab" href="#time-tab">HOURS</a></li>
-                                        <li class=" "><a id="day-tab-name" data-toggle="tab" href="#date-tab"  >DAYS</a></li>
-                                        <li class=" "><a id="dates-tab-name" data-toggle="tab" href="#dates-tab" >DATES</a></li>
+
+                    </div>-->
 
 
-                                    </c:when>
-                                    <c:when test="${not empty day_msg }">
-                                        <li class=" "><a id="time-tab-name" data-toggle="tab" href="#time-tab">HOURS</a></li>
-                                        <li class="active "><a id="day-tab-name" data-toggle="tab" href="#date-tab"  >DAYS</a></li>
-                                        <li class=" "><a id="dates-tab-name" data-toggle="tab" href="#dates-tab" >DATES</a></li>
+                    <div class="row">
 
-                                    </c:when>
-                                    <c:when test="${not empty date_msg }">
-                                        <li class=" "><a id="time-tab-name" data-toggle="tab" href="#time-tab">HOURS</a></li>
-                                        <li class=" "><a id="day-tab-name" data-toggle="tab" href="#date-tab"  >DAYS</a></li>
-                                        <li class="active "><a id="dates-tab-name" data-toggle="tab" href="#dates-tab" >DATES</a></li>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="col-md-6 col-sm-12 " style="padding-left: 3%;">
+                                <div class="form-group col-md-4 col-sm-8  control-label" id="st_Select_type" >Select type</div>
+                                <div class="form-group col-md-8 col-sm-8 ">
 
-                                    </c:when>
-                                    <c:otherwise >
-                                        <li class=" active"><a id="time-tab-name" data-toggle="tab" href="#time-tab">HOURS</a></li>
-                                        <li class=" "><a id="day-tab-name" data-toggle="tab" href="#date-tab"  >DAYS</a></li>
-                                        <li class=" "><a id="dates-tab-name" data-toggle="tab" href="#dates-tab" >DATES</a></li>
-
-                                    </c:otherwise>
-                                </c:choose>
-
-
-                            </ul>
-
-
-                            <div class="tab-content">
-                                <div id="time-tab" class="tab-pane fade <c:if test="${ empty day_msg && empty date_msg }"> in active</c:if> row ">
-                                    <form:form action="time-schedule" modelAttribute="ScheduleDetails"   method="post"  >
-                                        <div class="category_box">
-                                            <p class="font-h4">During a day, when do you want your Surf Safe controls to be active? Choose a time slot.</p>
-                                            <div class="row" style="margin-top: 8%; ">
-                                                <div class="form-group col-md-6">
-                                                    <label for="time-ip-start" class="col-md-3 control-label"> Start Time</label>
-                                                    <div class="input-group date  col-md-7" data-date="" data-date-format="hh:ii" data-link-field="time-ip-start" data-link-format="hh:ii">
-                                                        <input name="time_start_time" class="form-control form_time" id="time-ip-start" size="16" type="text" value="" required="required" >
-                                                        <span class="input-group-addon"><span class="time_image form_time "  data-link-field="time-ip-start" data-link-format="hh:ii" data-date-format="hh:ii" ></span></span>
-                                                    </div>
-
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="time-ip-end" class="col-md-3 control-label"> End Time</label>
-                                                    <div class="input-group date  col-md-7"  data-date=""  >
-                                                        <input name="time_end_time"  class="form-control form_time" id="time-ip-end" size="16" type="text"  value="" required="required" >
-
-                                                        <span class="input-group-addon"><span class="time_image form_time" data-date-format="hh:ii" data-link-field="time-ip-end"  data-link-format="hh:ii"></span></span>
-                                                    </div>
-
-                                                </div> 
-                                            </div>
-                                            <div class="panel-footer">
-
-                                                <div class="col-md-6"></div>
-                                                <div class="col-md-4 text-right">
-                                                    <c:if test="${not empty time_msg }">
-                                                        <h4 style="color:red;margin-top: 5%;">
-                                                           <c:if test="${fn:contains(time_msg, 'Oops!')}">
-                                    <span class="glyphicon glyphicon-alert"></span>
-                                    </c:if>
-                                                            <c:out value="${time_msg }"></c:out>
-                                                            </h4>
-                                                    </c:if>
-                                                </div>
-                                                <div class="col-md-2 text-right">
-
-                                                    <button id="time_block" class="btn billButton botton_aling font-h3" type="submit">SUBMIT</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form:form> 	
+                                    <select name="select_type" id=Scheduling_type>
+                                        <option value="Daily">Daily</option>
+                                        <option value="Weekdays">Weekdays</option>
+                                        <option value="Weekends">Weekends</option>
+                                        <option value="Custom"> Custom</option>
+                                        <option value="Non Recurring">Non Recurring</option>
+                                    </select> 
                                 </div>
-                                <div id="date-tab" class="tab-pane fade row <c:if test="${not empty day_msg }"> in active</c:if> ">
-                                    <form:form action="days-schedule" modelAttribute="ScheduleDetails"  method="post" >
-                                        <div class="category_box">
-                                            <p class="font-h4">Should your Surf Safe controls be active only on certain days? Choose days of the week.</p>
-                                            <div class="row" style="margin-top: 40px;">
-                                                <div class="form-group col-md-6">
-                                                    <label for="day-time-start" class="col-md-3 control-label">Start Time</label>
-                                                    <div class="input-group date  col-md-7" data-date="" >
-                                                        <input name="days_start_time" class="form-control form_time"  id="day-time-start" size="16" type="text" value="" required="required" >
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12" style="margin-left: -6px;" id="sc_date_div">
+                            <div class="form-group col-md-6">
+                                <label for="date-start" class="col-md-4 control-label">Start Date</label>
+                                <div class="input-group date  col-md-8 image_click" data-date="" >
+                                    <input name="dates_start_date"  class="form-control form_date" id="date-start" size="16" type="text" value="" required="required" >
 
-                                                        <span class="input-group-addon"><span class="time_image form_time" data-date-format="hh:ii" data-link-field="day-time-start" data-link-format="hh:ii"></span></span>
-                                                    </div>
-
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="day-time-end" class="col-md-3 control-label">End Time</label>
-                                                    <div class="input-group date  col-md-7" data-date="" >
-                                                        <input name="days_end_time" class="form-control form_time" id="day-time-end" size="16" type="text" value="" required="required" >
-
-                                                        <span class="input-group-addon"><span class="time_image form_time" data-date-format="hh:ii" data-link-field="day-time-end" data-link-format="hh:ii"></span></span>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div id="day_selector" class="col-md-10 col-md-offset-1 margin-top-10" >
-
-                                                    <input type="checkbox" name="days_days_checkbox" class="col-md-2" id="sun" value="sunday"><label for="sun">SUN</label>
-
-                                                    <input type="checkbox" name="days_days_checkbox" class="col-md-2" id="mon" value="monday"><label for="mon">MON</label>
-
-                                                    <input type="checkbox" name="days_days_checkbox" class="col-md-2" id="tue" value="tuesday"><label for="tue">TUE</label> 
-
-                                                    <input type="checkbox" name="days_days_checkbox" class="col-md-2" id="wed" value="wednesday"><label for="wed">WED</label>
-
-                                                    <input type="checkbox" name="days_days_checkbox" class="col-md-2" id="thu" value="thursday"><label for="thu">THU</label>
-
-                                                    <input type="checkbox" name="days_days_checkbox" class="col-md-2" id="fri" value="friday"><label for="fri">FRI</label>
-
-                                                    <input type="checkbox" name="days_days_checkbox" class="col-md-2" id="sat" value="saturday"><label for="sat">SAT</label>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-12">
-
-                                                <div class="col-md-6"></div>
-                                                <div class="col-md-4 text-right">
-                                                    <c:if test="${not empty day_msg }">
-                                                        <h4 style="color:red;margin-top: 5%;">
-                                                            <c:if test="${fn:contains(day_msg, 'Oops!')}">
-                                    <span class="glyphicon glyphicon-alert"></span>
-                                    </c:if>
-                                                            <c:out value="${day_msg }"></c:out>
-                                                            </h4>
-                                                    </c:if>
-                                                </div>
-                                                <div class="col-md-2 sumit_aling text-right">
-
-
-                                                    <button id="days_block" class="btn billButton botton_aling" type="submit">SUBMIT</button>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form:form> 	
-                                </div>
-                                <div id="dates-tab" class="tab-pane fade <c:if test="${not empty date_msg }"> in active</c:if> ">
-                                        <div class="category_box ">
-
-                                            <p class="font-h4">Want to active Advance/Custom Surf Safe for a specific period? Choose Dates. </p>
-
-
-                                            <div class="row" style="margin-top: 20px;" >
-                                            <form:form action="non-recurring-schedule" modelAttribute="ScheduleDetails"  method="post" >
-                                                <div class="row">
-                                                    <div class="form-group col-md-6">
-                                                        <label for="date-time-start" class="col-md-3 control-label">Start Time</label>
-                                                        <div class="input-group date  col-md-7" data-date="" >
-                                                            <input name="dates_start_time" class="form-control form_time" id="date-time-start" size="16" type="text" value=""  required="required" >
-
-                                                            <span class="input-group-addon"><span class="time_image form_time" data-date-format="hh:ii" data-link-field="date-time-start" data-link-format="hh:ii"></span></span>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="date-time-end" class="col-md-3 control-label">End Time</label>
-                                                        <div class="input-group date  col-md-7" data-date="" >
-                                                            <input  name="dates_end_time" class="form-control form_time" id="date-time-end" size="16" type="text" value=""   required="required" >
-
-                                                            <span class="input-group-addon"><span class="time_image form_time" data-date-format="hh:ii" data-link-field="date-time-end" data-link-format="hh:ii"></span></span>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="form-group col-md-6">
-                                                        <label for="date-time-end" class="col-md-3 control-label">Start Date</label>
-                                                        <div class="input-group date  col-md-7" data-date="" >
-                                                            <input name="dates_start_date"  class="form-control form_date" id="date-start" size="16" type="text" value="" required="required" >
-
-                                                            <span class="input-group-addon"><span class="date_image form_date" data-date-format="dd MM yyyy" data-link-field="date-start" data-link-format="yyyy/mm/dd"></span></span>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="date-time-end" class="col-md-3 control-label">End Date</label>
-                                                        <div class="input-group date  col-md-7" data-date="" >
-                                                            <input name="dates_end_date" class="form-control form_date" id="date-end" size="16" type="text" value="" required="required" >
-
-                                                            <span class="input-group-addon"><span class="date_image form_date" data-date-format="dd MM yyyy" data-link-field="date-end" data-link-format="yyyy/mm/dd"></span></span>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 margin-top-10">
-
-                                                    <div class="col-md-6"></div>
-                                                    <div class="col-md-4 text-right">
-                                                        <c:if test="${not empty date_msg }">
-                                                            <h4 style="color:red;margin-top: 5%;">
-                                                                <c:if test="${fn:contains(date_msg, 'Oops!')}">
-                                    <span class="glyphicon glyphicon-alert"></span>
-                                    </c:if>
-                                                                <c:out value="${date_msg }"></c:out>
-                                                                </h4>
-                                                        </c:if>
-                                                    </div>
-                                                    <div class="col-md-2 sumit_aling text-right">
-
-
-                                                        <button id="dates_block" class="btn billButton  botton_aling"  type="submit">SUBMIT</button>
-
-                                                    </div>
-                                                </div>
-                                            </form:form>
-                                        </div>
-
-                                    </div>
-
-
-                                </div>
-
+                                    <span class="input-group-addon" ><span class="date_image form_date" id="date_start_icon" data-date-format="dd MM yyyy" data-link-field="date-start" data-link-format="yyyy/mm/dd" for="date-start"></span></span>
+                                </div> 
 
                             </div>
+                            <div class="form-group col-md-6">
+                                <label for="date-end" class="col-md-4 control-label">End Date</label>
+                                    <div class="input-group date  col-md-8 image_click" data-date="" >
+                                    <input name="dates_end_date" class="form-control form_date" id="date-end" size="16" type="text" value="" required="required" >
+
+                                    <lable class="input-group-addon" for=""><span  class="date_image form_date " id="date_end_icon" data-date-format="dd MM yyyy" data-link-field="date-end" data-link-format="yyyy/mm/dd"></span></lable>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12"style="margin-left: -5px;" id="sc_time_div">
+                            
+                                <div class="form-group col-md-6">
+                                    <label for="date-time-start" class="col-md-4 control-label">Start Time</label>
+                                    <div class="input-group date  clockpicker col-md-8" data-date="" >
+                                        <input name="dates_start_time" class="form-control form_time" id="date-time-start" size="16" type="text" value=""  required="required" >
+
+                                        <span class="input-group-addon"><span  class="time_image form_time" id="time_start_icon" data-date-format="hh:ii" data-link-field="date-time-start" data-link-format="hh:ii"></span></span>
+                                    </div>
+
+                                </div>
+                          
+                            
+                                <div class="form-group col-md-6">
+                                    <label for="date-time-end" class="col-md-4 control-label">End Time</label>
+                                    <div class="input-group date  clockpicker col-md-8" data-date="" >
+                                        <input name="dates_start_time" class="form-control form_time" id="date-time-end" size="16" type="text" value=""  required="required" >
+
+                                        <span class="input-group-addon"><span class="time_image form_time" id="time_end_icon" data-date-format="hh:ii" data-link-field="date-time-start" data-link-format="hh:ii"></span></span>
+                                    </div>
+
+                                </div>
+                        
 
                         </div>
-                    </div>
+                        <div class="col-md-12" id="sc_day_div">
+                            <div id="day_selector" class="col-md-12 col-md-offset-1 margin-top-10 " >
+
+                                <input type="checkbox" name="days_days_checkbox" class="col-md-2 chk" id="sun" value="sunday" readonly="true"><label for="sun">SUN</label>
+
+                                <input type="checkbox" name="days_days_checkbox" class="col-md-2 chk" id="mon" value="monday"><label for="mon">MON</label>
+
+                                <input type="checkbox" name="days_days_checkbox" class="col-md-2 chk" id="tue" value="tuesday"><label for="tue">TUE</label> 
+
+                                <input type="checkbox" name="days_days_checkbox" class="col-md-2 chk" id="wed" value="wednesday"><label for="wed">WED</label>
+
+                                <input type="checkbox" name="days_days_checkbox" class="col-md-2 chk" id="thu" value="thursday"><label for="thu">THU</label>
+
+                                <input type="checkbox" name="days_days_checkbox" class="col-md-2 chk" id="fri" value="friday"><label for="fri">FRI</label>
+
+                                <input type="checkbox" name="days_days_checkbox" class="col-md-2 chk" id="sat" value="saturday"><label for="sat">SAT</label>
+                            </div>
+                        </div>
+<!--                        Done botton-->
+                        <div class="col-md-12" >
+                            <a id="apply_schedule_done" class="btn billButton" type="submit" data-toggle="modal" href="#applySchedule" style="margin-left: 27%;float: right">DONE</a>
+
+                        </div>
+                    </div><!-- Col-md-12 -->
                 </div>
             </div>
 
@@ -728,7 +534,7 @@
                         </script>-->
 
 
-            <div class="pt-30"></div>
+<!--            <div class="pt-30"></div>-->
 
 
 
@@ -752,49 +558,62 @@
         charset="UTF-8"></script>
 
         <script type="text/javascript">
-            $('#form_datetime').datetimepicker({
-                language: 'en',
-                format: "dd/mm/yyyy@hh:ii",
-                use24hours: true,
-                weekStart: 1,
-                todayBtn: 1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                forceParse: 0,
-                showMeridian: 0
-            });
-            $('.form_date').datetimepicker({
-                language: 'fr',
-                format: "yyyy/mm/dd",
-                startDate: new Date(),
-                weekStart: 1,
-                todayBtn: 1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                minView: 2,
-                forceParse: 0
-            });
-            $('.form_time').datetimepicker({
-                //language:  'fr',
-                //startDate: new Date(),
-                format: "hh:ii",
-                weekStart: 1,
-
-                autoclose: 1,
-                todayHighlight: 0,
-                startView: 1,
-                minView: 0,
-                maxView: 1,
-                forceParse: 0
-            });
+//            $('#form_datetime').datetimepicker({
+//                language: 'en',
+//                format: "dd/mm/yyyy@hh:ii",
+//                use24hours: true,
+//                weekStart: 1,
+//                todayBtn: 1,
+//                autoclose: 1,
+//                todayHighlight: 1,
+//                startView: 2,
+//                forceParse: 0,
+//                showMeridian: 0
+//            });
+//            $('.form_date').datetimepicker({
+//                language: 'fr',
+//                format: "yyyy/mm/dd",
+//                startDate: new Date(),
+//                weekStart: 1,
+//                todayBtn: 1,
+//                autoclose: 1,
+//                todayHighlight: 1,
+//                startView: 2,
+//                minView: 2,
+//                forceParse: 0
+//            });
+//            $('.form_time').datetimepicker({
+//                //language:  'fr',
+//                //startDate: new Date(),
+//                format: "hh:ii",
+//                weekStart: 1,
+//
+//                autoclose: 1,
+//                todayHighlight: 0,
+//                startView: 1,
+//                minView: 0,
+//                maxView: 1,
+//                forceParse: 0
+//            });
             $(document).ready(function () {
 
         //                $("#collapser").click(function(){
         //                    $("#collapse1").toggle();
         //                });
             });
+            
+//            $('.image_click input').click(function(event){
+//           $('#date-start').click();
+//        });
+//    var input = $('#input-a');     
+//    $('#button-a').click(function(e){
+//    // Have to stop propagation here
+//    e.stopPropagation();
+//    input.clockpicker('show')
+//            .clockpicker('toggleView', 'minutes');
+//});
+
+            
         </script>
     </body>
 </html>

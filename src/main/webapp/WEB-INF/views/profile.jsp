@@ -162,7 +162,10 @@
 							<h4 style="color:#0066cc;">Edit password &nbsp &nbsp <img alt="pencil" src="img/pencil.png" style="width:30px;height: 30px;margin-bottom: 10%;"></h4>
 						</a>
 					</div>
+					<h3 style="color:#0066cc; text-align: center; font-size:15px;"><b>
+                <c:if test="${ not empty result}">${result}</c:if></b></h3>
 				</div>
+				
 			</div>
 		</div>
 		
@@ -221,6 +224,7 @@
 						<button type="submit" class="btn billButton pull-right" style="">UPDATE</button>
 					</form:form>
 					
+                 
                  
               </div><!-- Col-md-12 -->
             </div><!-- Modal Body -->

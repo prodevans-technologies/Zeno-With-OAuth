@@ -141,4 +141,12 @@ public interface RestConfig {
     String UPDATE_IP_ADDRESS = HOST + "/api/config/devices/device/{domain_id}/config/orgs/org-services/OneEight/objects/addresses/address/{address_object_name}";
     
     
+    /**
+     * API URL for getting schedule status
+     */
+    String SCHEDULE_STATUS = HOST + "/api/config/devices/device/{domain_id}/config/orgs/org-services/OneEight/objects/schedules/schedule/{schedule_object}?deep=true";
+    
+    
+    
+    
 }

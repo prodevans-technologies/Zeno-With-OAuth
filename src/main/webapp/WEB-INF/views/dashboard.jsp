@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html>
     <meta charset="utf-8">
@@ -11,6 +11,8 @@
     <meta content="ONE8 User Portal Keywords" name="keywords">
     <!--  include the all css components -->
     <jsp:include page="component/css.jsp"></jsp:include>
+    
+    <jsp:include page="component/parental_check_js.jsp"></jsp:include>
 
         <style>
             canvas {
@@ -111,7 +113,8 @@
                     min-height: 330px !important;
                 }
             }
-
+            
+            
         </style>
 
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -161,6 +164,7 @@
                 chart.draw(data, options);
             }
     </script>
+ 
 </head>
 <body class="corporate" style="font-family: Roboto;">
     <!-- BEGIN HEADER -->
@@ -194,6 +198,13 @@
         <div class="col-md-8 col-sm-12 pt-20 pt-20M" style="background-color: #ecf0f1;min-height: 116px;">
             <div class="col-md-12">
                 <h1 style="color: black;" class="currentBillFontforiPhone5">Welcome ${user_details.getFirst_name() }, to your One8 page</h1>
+                
+                
+                	
+                
+                <!--  <p class="sampleClass">Parental Control</p> -->
+                
+                
             </div>
         </div>
     </div>
@@ -224,6 +235,10 @@
             </div>
         </div>
     </div>
+    
+    
+    
+    
     <!-- included pop up -->
     <jsp:include page="component/pop-up.jsp"></jsp:include>
     <jsp:include page="component/footer.jsp"></jsp:include>

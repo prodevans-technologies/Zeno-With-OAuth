@@ -1,8 +1,8 @@
-<%-- 
+<!-- 
     Document   : filter
     Created on : Oct 4, 2017, 12:34:28 PM
-    Author     : rajanikant
---%>
+    Author     : rajanikant,abhinish
+-->
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -15,14 +15,22 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+       
 
-        <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/jquery.min.js"
-        charset="UTF-8"></script>
+        
+        
+       
+    
+       <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/jquery.min.js" charset="UTF-8"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/jquery.min.js"
-        charset="UTF-8"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/respond.min.js"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
+<!--         ClockPicker Stylesheet 
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/clockpicker.css">
+         ClockPicker script 
+  <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/clockpicker.js"></script>
+                            -->
+
 
 
 
@@ -40,6 +48,10 @@
 
         <!--  include the all css components -->
         <jsp:include page="component/css.jsp"></jsp:include>
+        
+        <jsp:include page="component/parental_check_js.jsp"></jsp:include>
+        
+        
             <style>
                 input[type="url"]#url_pattern {
                     width: 100% !important;
@@ -48,6 +60,37 @@
                     border: 1px solid #bdc3c7;
                     padding-bottom: 8px ! important;
                     padding-top: 8px ! important;
+                    
+                }
+                
+                .time_image {
+                    padding: 6px 20px 8px 20px;
+                    background-image: url('/zeno/img/icons/Time_blue.png') !important;
+                    background-size: 62% !important;
+                    background-repeat: no-repeat !important;
+                    margin: 0px -9px 0px 7px ;
+                    
+                }
+                .date_image {
+                    padding: 6px 20px 8px 20px;
+                    background-image: url('/zeno/img/icons/Calendar_blue.png') !important;
+                    background-size: 62% !important;
+                    background-repeat: no-repeat !important;
+                    margin: 0px -9px 0px 7px ;
+                }
+                .input-group-addon {
+                    
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 1;
+                    color: #555;
+                    text-align: center;
+                    border:unset;
+                    background-color: unset !important;
+                    border-radius: unset !important;                
+                    padding: 9px 0px 6px 0px;
+                    border-right-width: 0px;
+                    margin-left: 0px;
                 }
 
 
@@ -106,12 +149,11 @@
                 
                                 }*/
                 /*icons and background sizes*/
-                
-            .nav-tabs > li.active > a#advance-filter {
-                color: #716868;
-                padding: 5px 15px 15px 60px;
-                border-bottom: 7px red solid !important;
-                background-image: url('${pageContext.request.contextPath }/img/icons/Check_red.png') !important;
+                .nav-tabs > li.active > a#advance-filter {
+                    color: #716868;
+                    padding: 5px 15px 15px 60px;
+                    border-bottom: 7px red solid !important;
+                    background-image: url('${pageContext.request.contextPath }/img/icons/Check_red.png') !important;
                 background-size: 43px !important;
                 background-repeat: no-repeat !important;
                 font-size: 20px;
@@ -165,6 +207,24 @@
                 background-repeat: no-repeat !important;
                 font-size: 20px;
             }
+            .nav-tabs > li > a#status-tab    {
+                color: #716868;
+                padding: 5px 15px 15px 60px;
+                border-bottom: 7px #fff solid !important;
+                background-image: url('${pageContext.request.contextPath }/img/icons/status-ico.png') !important;
+                background-size: 43px !important;
+                background-repeat: no-repeat !important;
+                font-size: 20px;
+            }
+            .nav-tabs > li.active > a#status-tab {
+                color: #716868;
+                padding: 5px 15px 15px 60px;
+                border-bottom: 7px red solid !important;
+                background-image: url('${pageContext.request.contextPath }/img/icons/status-ico.png') !important;
+                background-size: 43px !important;
+                background-repeat: no-repeat !important;
+                font-size: 20px;
+            }
             .nav-tabs > li > a{
 
                 margin-top: 10px;
@@ -180,12 +240,8 @@
                 position: relative;
                 display: block;
                 margin-right: 70px;
-                min-width: 250px;
-                
+                min-width: 18%;
             }
-            
-             
-
             .border{
                 /*border-bottom: 1px solid #ddd;*/
                 padding: unset ! important;
@@ -206,6 +262,34 @@
                 text-align: left;
                 padding-top: unset;
             }
+            input[type="checkbox"] + label::before {
+                content: '';
+                display: block;
+                width: 25px;
+                height: 25px;
+                border: 1.2px solid #010745;
+                position: absolute;
+                left: 0;
+                top: 0;
+                opacity: .6;
+                -webkit-transition: all .12s, border-color .08s;
+                transition: all .12s, border-color .08s;
+            }
+            #day_selector   input[type="checkbox"] + label {
+                display: block;
+                position: relative;
+                padding-left: 35px;
+                margin-bottom: 1px;
+
+                color: #010745;
+                cursor: pointer;
+
+                -moz-user-select: none;
+
+                width: 100px;
+                padding-top: unset !important;
+                float: left;
+            }
             .ScrollStyle {
 
                 overflow-y: scroll;
@@ -214,10 +298,10 @@
             .category_box {
 
                 min-height: 100px;
-                padding: 3.5% ;
+                padding: 40px;
                 border: 1px solid #bdc3c7;
                 margin-top: -1px;
-               min-height: 380.8px;
+                min-height: 350px;
 
             }
             .custom_box {
@@ -239,7 +323,7 @@
                 padding-bottom: unset;
 
             }*/
-            .row{
+            #custom_urlblocker_form >.row{
                 margin-right: unset;
                 margin-left: unset;
             }
@@ -301,13 +385,89 @@
                 border-radius: 10px;
                 -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
             }
-            .category_list
-            {
-                height:300px ; 
-                overflow-x: auto;
+            #applySchedule > .modal-dialog > .modal-content > .modal-header{
+                color:white;
+                background-color: red;
+                padding-top: 1%;
+                padding-bottom: 1%;
+                border:2px #010745 solid;
+                border-color: black;
+                
             }
-            
-/*        Tablet*/
+           #applySchedule > .modal-dialog > .modal-content {
+           min-width: 60%;
+           
+           min-height: 50%;
+           max-height: 60%
+           }
+           #applySchedule > .modal-dialog {
+            min-width: 60%;
+           max-width: 70%;
+           min-height: 40%;
+           max-height: 60%;
+           }
+            .col-md-6 >.label {
+            color: black;  
+            text-align: right;
+            margin:  3% 0% 3% 0%;
+            font-size: 14px;
+           }
+           .col-md-12, .col-sm-12 > .col-md-6
+           {
+           padding: 1%
+           }
+           .status-tab_box{
+            max-height: 150px;
+            overflow-x: auto;       
+           }
+           .scroll::-webkit-scrollbar-thumb {
+               border-radius: 10px;
+               -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+           }
+           #myAlert{
+               color: #db3236;
+               position: fixed;
+               bottom: 30px;
+               left: 30px;
+               background-color: #fff;
+               border: 1px #db3236 solid;
+           }
+           .col-md-2
+           {
+               /*width: 12.666667% !important;*/
+               padding-right: unset !important;
+               padding-left: unset !important;
+           }
+           .col-md-4 {
+               padding-left: unset;
+               padding-right: unset;
+               width: 33.33333333% !important;
+           }
+
+           .ss-status-led{
+               height: 10px;
+               width: 10px; 
+               float:start ;width:10px;height:10px;
+           }
+           #day_selector
+           {
+               margin-left: 2.33% ! important;
+               margin-right:2.33% ! important;
+           }
+           
+/*           Footer alingment need to be adjusted for SurfSafe*/
+           
+           .footer > .row 
+           {
+               margin-left: -1% ! important; 
+               margin-right: -1% ! important;
+           }
+
+           
+/*          Media Queries for the folloing devices*/
+
+
+            /*        Tablet*/
             @media (max-width: 730px) and (min-width:501px)
             {
                 .col-md-7, col-xs-7,.col-md-5, col-xs-5 
@@ -364,86 +524,142 @@
                     position: relative; 
                     display: block; 
                     margin-right: unset !important;
-                    min-width: 30% !important;
+                    min-width: 50% !important;
                    
                 }
                 .nav-tabs > li.active > a#advance-filter {
                     color: #716868;
-                    padding: 5px 15px 15px 33px;
+                    padding: 2% 6% 11% 24%;
                     border-bottom: 5px red solid !important;
                     background-image: url('${pageContext.request.contextPath }/img/icons/Check_red.png') !important;
-                    background-size: 30px !important;
+                    background-size: 18% !important;
                     background-repeat: no-repeat !important;
-                     padding-bottom: 20px;
-                    font-size: 70% !important;    
+                    font-size: 100% !important;    
                     width: 90%;
                 }
 
                 .nav-tabs > li > a#advance-filter {
                     color: #716868;
-                    padding: 5px 15px 15px 33px;
+                    padding: 2% 6% 11% 24%;
                     border-bottom: 5px #fff solid !important;
                     background-image: url('${pageContext.request.contextPath }/img/icons/Check_grey.png') !important;
-                    background-size: 30px !important;
+                    background-size: 18% !important;
                     background-repeat: no-repeat !important;
-                    padding-bottom: 20px;
-                    font-size: 70% !important;    
+                    font-size: 100% !important;    
                     width: 90%;
                 }
                 .nav-tabs > li.active > a#block-filter {
                     color: #716868;
-                    padding: 5px 15px 15px 33px;
+                    padding: 2% 6% 11% 24%;
                     border-bottom: 5px red solid !important;
                     background-image: url('${pageContext.request.contextPath }/img/icons/Blocked_red.png') !important;
-                    background-size: 30px !important;
+                    background-size: 18% !important;
                     background-repeat: no-repeat !important;
-                     padding-bottom: 20px;
-                    font-size: 70% !important;    
+                    font-size: 100% !important;    
                     width: 90%;
                 }
 
                 .nav-tabs > li > a#block-filter {
                     color: #716868;
-                    padding: 5px 15px 15px 33px;
+                    padding: 2% 6% 11% 24%;
                     border-bottom: 5px #fff solid !important;
                     background-image: url('${pageContext.request.contextPath }/img/icons/Blocked_grey.png') !important;
-                    background-size: 30px !important;
+                    background-size: 18% !important;
                     background-repeat: no-repeat !important;
-                    padding-bottom: 20px;
-                   font-size: 70% !important;    
+                   font-size: 100% !important;    
                     width: 90%;
                 }
 
                 .nav-tabs > li.active > a#custom-filter {
                     color: #716868;
-                    padding: 5px 15px 15px 33px;
+                    padding: 2% 6% 11% 24%;
                     border-bottom: 5px red solid !important;
                     background-image: url('${pageContext.request.contextPath }/img/icons/Custom_red.png') !important;
-                    background-size: 30px !important;
+                    background-size: 18% !important;
                     background-repeat: no-repeat !important;
-                    padding-bottom: 20px;
-                   font-size: 70% !important;    
+                   font-size: 100% !important;    
                     width: 90%;
                 }
 
 
                 .nav-tabs > li > a#custom-filter {
                     color: #716868;
-                    padding: 5px 15px 15px 33px;
+                    padding: 2% 6% 11% 24%;
                     border-bottom: 5px #fff solid !important;
                     background-image: url('${pageContext.request.contextPath }/img/icons/Custom_grey.png') !important;
-                    background-size: 30px !important;
+                    background-size: 18% !important;
                     background-repeat: no-repeat !important;
-                    padding-bottom: 20px;
-                    font-size: 70% !important;    
+                    font-size: 100% !important;    
+                    width: 90%;
+                }
+                .nav-tabs > li.active > a#status-tab {
+                    color: #716868;
+                    padding: 2% 6% 11% 24%;
+                    border-bottom: 5px red solid !important;
+                    background-image: url('${pageContext.request.contextPath }/img/icons/status-ico.png') !important;
+                    background-size: 18% !important;
+                    background-repeat: no-repeat !important;
+                    font-size: 100% !important;    
+                    width: 90%;
+                }
+
+
+                .nav-tabs > li > a#status-tab {
+                    color: #716868;
+                    padding: 2% 6% 11% 24%;
+                    border-bottom: 5px #fff solid !important;
+                    background-image: url('${pageContext.request.contextPath }/img/icons/status-ico.png') !important;
+                    background-size: 18% !important;
+                    background-repeat: no-repeat !important;
+                    font-size: 100% !important;    
                     width: 90%;
                 }
                 .row > .font-h3 {
                     font-size: 130%;
                     
                 }
-               
-
+                .tab-content {
+                    
+                    padding-left: 4% !important;
+                    padding-right: 4% !important;
+                }
+                
+/*               to aling Block specific websites. */
+                .row > .col-md-4
+                {
+                    width:100% !important;
+                }
+                #blockedALLUnblock
+                {
+                    margin-right: 4%;
+                }
+                #apply_schedule
+                {
+                    float: inline-end;
+                }
+                .panel-footer > .text-right    
+                {
+                    width:100% ! important;
+                }
+                #day_selector   input[type="checkbox"] + label
+                {
+                    width: 50% ! important;
+                }
+/*                input[type="checkbox"] + label::before 
+                {
+                    content: '';
+                    display: block;
+                    width: 25px;
+                    height: 25px;
+                    border: 1.2px solid #010745;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    opacity: .6;
+                    -webkit-transition: all .12s, border-color .08s;
+                    transition: all .12s, border-color .08s;
+                }*/
+                                                                
 
             }
             
@@ -454,6 +670,15 @@
                 {
                     font-size: 36px;
                 }
+                .modal-body > .row > .col-md-12
+                {
+                    margin-left: -1%;
+                }
+                #blockedALLUnblock
+                {
+                    margin-right: 4%;
+                }
+                
             }
 
 
@@ -497,6 +722,15 @@
                 }
                 
             }
+
+
+
+            
+            
+           
+
+            
+
         </style>
 
 
@@ -515,11 +749,11 @@
                 <ul> 
 
                     <li class="dropdown active"></li>
-                    <li ><a href="${pageContext.request.contextPath }/dashboard">MY ONE8</a></li>
+                    <li><a href="${pageContext.request.contextPath }/dashboard">MY ONE8</a></li>
                     <li><a
                             href="${pageContext.request.contextPath }/billingPayment">PAY YOUR BILL</a></li>
                     <li class="active"><a
-                            href="${pageContext.request.contextPath }/control">SURF SAFE</a></li>
+                            href="${pageContext.request.contextPath }/control">SURF SAFE <img class="ss-status-led" id="parental-led"  title="SURF SAFE Status" ></a></li>
                     <li><a href="${pageContext.request.contextPath }/service">SERVICE</a></li>
 
                     <li><a href="${pageContext.request.contextPath }/profile">PROFILE</a></li>
@@ -533,14 +767,13 @@
     <div class="row firstRow pt-20"
          style="background-image: url('${pageContext.request.contextPath }/img/red_long.png');" style="clear: both">
         <!--  <h1 class="paddingLeftTop" >Parental Control</h1> <h1 class="paddingRight" >Hi Vamsi </h1>  -->
-        <div class="col-md-12 col-lg-12 col-sm-12">
-        <div class="col-md-6 col-sm-6" style="padding-left: 4.9%;">
-            <h1 class="Surf_Safe"style="float: left" >Surf Safe</h1>
+        <div class="col-md-5 col-sm-5" style="padding-left: 4.9%;">
+            <h1>Surf Safe</h1>
         </div>
-        <div class="col-md-6 col-sm-6" style="padding-left: 4.9%;margin-bottom: 20px;">
-            <h1 class="user_name"style="float: start; font-size:27px;"> Hi ${uesr_name}</h1>
+        <div class="col-md-7 col-sm-7" style="padding-left: 4.9%;margin-bottom: 20px;">
+            <h1 style="float: middle">Hi ${uesr_name}</h1>
         </div>
-    </div>
+
     </div>
 
 
@@ -552,30 +785,42 @@
         </h4>
 
 
-        <ul class="nav nav-tabs  margin-top-20 ">
+        <ul class="nav nav-tabs  margin-top-20">
             <c:choose>
                 <c:when test="${not empty advanced_error }">
-                    <li class=" active "><a id="advance-filter" data-toggle="tab" href="#Allowed">ADVANCED</a></li>
+                    <li class=" active"><a id="advance-filter" data-toggle="tab" href="#Allowed">ADVANCED</a></li>
                     <li class=" "><a id="block-filter" data-toggle="tab" href="#Blocked"  >BLOCKED</a></li>
                     <li class=" "><a id="custom-filter" data-toggle="tab" href="#Custom" >CUSTOM</a></li>
+                    <li class=" "><a id="status-tab" data-toggle="tab" href="#status" >STATUS</a></li>
+                    
                     <c:set var="default" value="active"></c:set>
                     </c:when>
                     <c:when test="${not empty blocked_error }">
                     <li class=" "><a id="advance-filter" data-toggle="tab" href="#Allowed">ADVANCED</a></li>
                     <li class=" active"><a id="block-filter" data-toggle="tab" href="#Blocked"  >BLOCKED</a></li>
                     <li class=" "><a id="custom-filter" data-toggle="tab" href="#Custom" >CUSTOM</a></li>
+                    <li class=" "><a id="status-tab" data-toggle="tab" href="#status" >STATUS</a></li>
                        
                     </c:when>
                     <c:when test="${not empty update_url_error ||  not empty custom_error }">
                     <li class=" "><a id="advance-filter" data-toggle="tab" href="#Allowed">ADVANCED</a></li>
                     <li class=" "><a id="block-filter" data-toggle="tab" href="#Blocked"  >BLOCKED</a></li>
                     <li class="active "><a id="custom-filter" data-toggle="tab" href="#Custom" >CUSTOM</a></li>
-                       
+                    <li class=" "><a id="status-tab" data-toggle="tab" href="#status" >STATUS</a></li>   
                     </c:when>
+                    <c:when test="${not empty update_url_error ||  not empty custom_error }">
+                    <li class=" "><a id="advance-filter" data-toggle="tab" href="#Allowed">ADVANCED</a></li>
+                    <li class=" "><a id="block-filter" data-toggle="tab" href="#Blocked"  >BLOCKED</a></li>
+                    <li class=""><a id="custom-filter" data-toggle="tab" href="#Custom" >CUSTOM</a></li>
+                    <li class="active"><a id="status-tab" data-toggle="tab" href="#status" >STATUS</a></li>   
+                    </c:when>
+                    
+                    
                     <c:otherwise>
-                    <li class=" active"><a id="advance-filter" data-toggle="tab" href="#Allowed">ADVANCED</a></li>
+                    <li class="active"><a id="advance-filter" data-toggle="tab" href="#Allowed">ADVANCED</a></li>
                     <li class=" "><a id="block-filter" data-toggle="tab" href="#Blocked"  >BLOCKED</a></li>
                     <li class=" "><a id="custom-filter" data-toggle="tab" href="#Custom" >CUSTOM</a></li>
+                    <li class="  "><a id="status-tab" data-toggle="tab" href="#status" >STATUS</a></li>
                         <c:set var="default"  value="active"></c:set>
                     </c:otherwise>
                 </c:choose>
@@ -588,9 +833,9 @@
         <div class="tab-content">
             <div id="Allowed" class="tab-pane fade  <c:if test="${ empty blocked_error && empty update_url_error && empty custom_error  }"> in active </c:if> row ">
                 <form:form action="allow-categories" modelAttribute="CategoryListDetails" method="post" >
-                    <div class=" category_box">
+                    <div class="category_box">
 
-                        <div  class="row category_list">   
+                        <div  style="height:250px ; overflow-x: auto;">   
                             <p class="font-h4" style="padding-bottom: 15px;">Choose content categories that you don’t want to view on your network and hit BLOCK to keep related websites out.</p>
                             <c:forEach items="${CAT.getAllowded_catogery()}" var="cat" >
                                 <div class="col-md-6 col-sm-6 border text-justify">
@@ -607,7 +852,7 @@
                         <div class="col-md-6"></div>
                         <div class="col-md-4 text-right">
                             <c:if test="${not empty advanced_error }">
-                                <h4 style="color:red;margin-top: 3%;">
+                                <h4 style="color:red;margin-top: 5%;">
                                     <c:if test="${fn:contains(advanced_error, 'Oops!')}">
                                     <span class="glyphicon glyphicon-alert"></span>
                                     </c:if>
@@ -624,9 +869,7 @@
             <div id="Blocked" class="tab-pane fade row <c:if test="${not empty blocked_error }"> in active</c:if>">
                 <form:form action="block-categories" modelAttribute="CategoryListDetails" method="post" >
                     <div class="category_box">
-
-
-                        <div class="category_list"> 
+                        <div style="height:250px ; overflow-x: auto;"> 
                             <p class="font-h4" style="padding-bottom: 15px;">View and edit your list of blocked categories. To allow a category from this list, check the box next to it and hit UNBLOCK </p>
                             <c:forEach items="${CAT.getBlocked_catogery()}" var="cat">
                                 <div class="col-md-6 col-sm-6 border text-justify">
@@ -637,33 +880,33 @@
                     </div>
                     <form:hidden path="allowded_catogery" />
                     <form:hidden path="blocked_catogery" />
-                    <div class="panel-footer ">
-
-                        <div class="col-md-6"></div>
-                        <div class="col-md-4 text-right">
+                    <div class="row text-right">
+                        <!--<div class="col-md-3"></div>-->
+                        <div class="col-md-8 text-right">
                             <c:if test="${not empty blocked_error }">
-                                <h4 style="color:red;margin-top: 3%;">
+                                <p style="color:red;margin-top: 4%; " >
                                     <c:if test="${fn:contains(blocked_error, 'Oops!')}">
-                                    <span class="glyphicon glyphicon-alert"></span>
+                                        <span class="glyphicon glyphicon-alert"></span>
                                     </c:if>
                                     <c:out value="${blocked_error }"></c:out>
-                                    </h4>
+                                </p>
                             </c:if>
                         </div>
-                        <div class="col-md-2 text-right">
-                            <button id="blockedUnblock" class="btn billButton" type="submit">UNBLOCK</button>
+                        <div class="col-md-4" >
+                        <button id="blockedUnblock" class="btn billButton" type="submit" formaction="block-categories" >UNBLOCK</button>
+                        <button id="blockedALLUnblock" class="btn billButton" type="submit" formaction="block-all-categories">UNBLOCK ALL</button>
                         </div>
                     </div>
-                </form:form> 	
+                 </form:form>
             </div>
             <div id="Custom" class="tab-pane fade row <c:if test="${not empty update_url_error || not empty custom_error }"> in active</c:if>">
                     <div class="category_box ">
 
 
-                        <div class="row  ">
+                        <div class="row">
                         <form:form  action="update-patterns" modelAttribute="CategoryListDetails" method="post" >
                             <div class=" row" >
-                                <label for="url-block" class="col-md-4 text-justify font-h3" title="Add the URL to be blocked" >Block specific websites.</label>
+                                <label for="url-block" class="col-md-4 col-sm-12 text-justify font-h3" title="Add the URL to be blocked" >Block specific websites.</label>
                                 <div class="col-md-8" style="padding: unset;">
                                     <input id="url_pattern" type="url" class="" style="width:100%; margin-top: 6px; font-size: 24px;" name="url_pattern" placeholder="www.example.com" pattern="[h]{0,1}[ftw][tw][pw][s]{0,1}[.:/]{1,3}[\w\W]*" required="required" >
                                 </div>
@@ -675,7 +918,7 @@
                                 <div class="col-md-6"></div>
                                 <div class="col-md-4 text-right">
                                     <c:if test="${not empty update_url_error }">
-                                        <h4 style="color:red;margin-top: 3%;">
+                                        <h4 style="color:red;margin-top: 5%;">
                                             <c:if test="${fn:contains(update_url_error, 'Oops!')}">
                                     <span class="glyphicon glyphicon-alert"></span>
                                     </c:if>
@@ -691,8 +934,9 @@
                         </form:form>
 
                     </div>
+                        
                     <div style="height:200px ; overflow-x: auto;">  
-                        <form:form action="delete-patterns" modelAttribute="CategoryListDetails" method="post" >
+                        <form:form action="delete-patterns" modelAttribute="CategoryListDetails" method="post"  id="custom_urlblocker_form">
 
                             <div class="row">
                                 <p class="font-h4 " style="padding-bottom: 15px">Key in specific URLs you want to block to curate your network.  </p>
@@ -708,31 +952,222 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-footer ">
-
-                        <div class="col-md-6"></div>
-                        <div class="col-md-4 text-right">
+                    
+                            <div class="row text-right">
+                        <!--<div class="col-md-3"></div>-->
+                        <div class="col-md-8 text-right">
                             <c:if test="${not empty custom_error }">
-                                <h4 style="color:red;margin-top: 3%;">
+                                <p style="color:red;margin-top: 4%; " >
                                     <c:if test="${fn:contains(custom_error, 'Oops!')}">
-                                    <span class="glyphicon glyphicon-alert"></span>
+                                        <span class="glyphicon glyphicon-alert"></span>
                                     </c:if>
                                     <c:out value="${custom_error }"></c:out>
-                                    </h4>
+                                </p>
                             </c:if>
                         </div>
-                        <div class="col-md-2 text-right">
-                            <button id="customUnblock" class="btn billButton" type="submit">UNBLOCK</button>
+                        <div class="col-md-4" >
+                        <button id="blockedUnblock" class="btn billButton" type="submit" formaction="delete-patterns" >UNBLOCK</button>
+                        <button id="blockedALLUnblock" class="btn billButton" type="submit" formaction="delete-all-patterns">UNBLOCK ALL</button>
                         </div>
                     </div>
                 </form:form>
 
+                    
             </div>
+                    
+                     <div id=status class="tab-pane fade row <c:if test="${not empty blocked_error }"> in active</c:if>">
+                <form:form action="Status" >
+                 
+                    <div class="category_box">  
+                        <form:form action="delete-patterns" modelAttribute="CategoryListDetails" method="post" >
 
+                            <div class="row">
+                                <p class="font-h4 " style="padding-bottom: 15px">Hi ${uesr_name} you have applied the </p><br>
+                                <div >
+                                <p> Recuring: </p>
+                                <div class="col-md-12 status-tab_box" >
+                                    <table class="table table-border">
+                                        <tr>
+                                            <th>Start Time</th> 
+                                            <th>End Time</th>
+                                            <th>Days</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                       <!--  <tr>                                        
+							                    <c:forEach items="${scheduleStatusDetails}" var="scheduleStatusDetails">                       
+							            		<tr>
+                									<td>${StatusDetails.start_time}</td>
+               										 <td>${StatusDetails.getEnd_time()}</td>
+           										 </tr>
+        										</c:forEach>  
+							                    
+            									<td><span class="glyphicon glyphicon-remove" style="color:red"></span></td>
+										</tr>
+                                            -->
+                                          <tr>                                        
+                                            <td>${StatusDetails.start_time}</td> 
+                                            <td>${StatusDetails.end_time}</td>
+                                            <td>${StatusDetails.when}</td>
+
+
+                                            <td><span class="glyphicon glyphicon-remove" style="color:red"></span></td>
+                                        </tr>
+                                       
+                                    </table>
+
+                                </div>
+                               </div>
+                                <div >
+                                    <p style="margin-top: 18%"> Non Recuring: </p>
+                                <div class="col-md-12 status-tab_box">
+                                    <table class="table table-border">
+                                        
+                                        <tr>
+                                            <th>Start Date</th> 
+                                            <th>Start Time</th> 
+                                            <th>End Date</th>
+                                            <th>End Time</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                        <tr>                                       
+                                           
+                                            
+                                            <td>${StatusDetails.start_date}</td> 
+                                            <td>${StatusDetails.start_time}</td> 
+                                            <td>${StatusDetails.end_date}</td>
+                                            <td>${StatusDetails.end_time}</td>                                     
+                          
+                                            <td><span class="glyphicon glyphicon-remove" style="color:red"></span></td>
+                                        </tr>
+                                                                             
+                                    </table>
+
+                                </div>
+                                </div>
+                            </div>
+                        </form:form>
+                    </div>
+
+                 </form:form>
+                <div class ="col-md-10"></div>
+                <div class="col-md-2" >
+                    <a id="apply_schedule" class="btn billButton" type="submit" data-toggle="modal" href="#applySchedule" style="float:right">APPLY SCHEDULE</a>
+                    
+                </div>
+                
+                <!-- The Add_Schedule Pop_Up  -->
+                <div id="applySchedule" class="modal fade" style="margin-top:5%;">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#FFF">
+                                    <img alt="" src="img/close.png" style="height: 25px;width: 25px;">
+                                </button>
+                                <h4 class="modal-title" style="padding-left: 5%;text-align: center;">ADD SCHEDULE</h4>
+                            </div>
+
+                            <div class="modal-body" >
+                                <div class="row">
+                                    <div class="col-md-12" ><jsp:include page="parental-control.jsp"/></div>
+                                   <jsp:include page="component/timedatepicker.jsp"></jsp:include>
+                                   <jsp:include page="component/analogueclockpicker.jsp"></jsp:include>
+<!--                                    <div class="col-md-12 col-sm-12">
+                                        <div class="col-md-6">
+                                        <div class="col-md-4 label">Select type</div>
+                                        <div class="col-md-8">
+                                           
+                                            <select name="select_type" id=Scheduling_type>
+                                                <option value="Daily">Daily</option>
+                                                <option value="Weekdays">Weekdays</option>
+                                                <option value="Weekends">Weekends</option>
+                                                <option value="Custom"> Custom</option>
+                                                <option value="Non Recurring">Non Recurring</option>
+                                            </select> 
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12" style="margin-left: -6px;" id="sc_date_div">
+                                        <div class="col-md-6">
+                                            <div class="col-md-4 label" id="start_date_l">Start Date</div>                                        
+                                            <div 
+                                                class="col-md-8 input-group datepicker" id="start_date" data-placement="right" data-align="top" data-autoclose="true">
+                                                <input type="text" name="Start Date ">
+                                                <span class="input-group-addon" style="border-bottom: 1px solid #bdc3c7;">
+                                                    <span class="date_image form_date" data-date-format="dd MM yyyy" data-link-field="date-start" data-link-format="yyyy/mm/dd">                                                     
+                                                    </span>                                                     
+                                                </span>
+                                            </div>
+                                        </div>
+                                         <div class="col-md-6">
+                                             <div class="col-md-2 label" id="end_date_l">End Date
+                                             </div>                                       
+                                             <div class="col-md-8 input-group datepicker" id="end_date" data-placement="right" data-align="top" data-autoclose="true">
+                                                 <input type="text" name="End Date">
+                                                 <span class="input-group-addon" style="border-bottom: 1px solid #bdc3c7;">
+                                                     <span class="date_image form_date" data-date-format="dd MM yyyy" data-link-field="date-start" data-link-format="yyyy/mm/dd">
+
+                                                     </span>
+
+                                                 </span>
+                                             </div>
+                                         </div>
+                                    </div>
+                                         <div class="col-md-12 col-sm-12"style="margin-left: -5px;" id="sc_time_div">
+                                             <div class="col-md-6">
+                                                 <div class="col-md-4 label">Start Time</div>
+                                                 <div class="input-group col-md-8 clockpicker">
+                                                     <input type="text" name="Start Time " id="start_time" class="form-control" value="09:30"> 
+                                                     <span class="input-group-addon" style="border-bottom: 1px solid #bdc3c7;">
+                                                         <span class="time_image form_time" data-date-format="hh:ii" data-link-field="time-ip-end"  data-link-format="hh:ii">                                                     
+                                                         </span>
+
+                                                     </span>
+                                                 </div>
+                                             </div>
+                                             <div class="col-md-6">
+                                                 <div class="col-md-2 label" style="margin-right: 2%;">End Time</div>
+                                                 <div class="input-group col-md-8 clockpicker">
+                                                     <input type="text" name="End Time">
+                                                     <span class="input-group-addon" style="border-bottom: 1px solid #bdc3c7;">
+                                                         <span class="time_image form_time" data-date-format="hh:ii" data-link-field="time-ip-end"  data-link-format="hh:ii">
+
+                                                         </span>
+
+                                                     </span>
+                                                 </div>
+                                             </div>
+
+                                         </div>
+                                    <div class="col-md-12" id="sc_day_div">
+                                        <div id="day_selector" class="col-md-12 col-md-offset-.5 margin-top-10" >
+
+                                            <input type="checkbox" name="days_days_checkbox" class="col-md-2 chk" id="sun" value="sunday" readonly="true"><label for="sun">SUN</label>
+
+                                            <input type="checkbox" name="days_days_checkbox" class="col-md-2 chk" id="mon" value="monday"><label for="mon">MON</label>
+
+                                            <input type="checkbox" name="days_days_checkbox" class="col-md-2 chk" id="tue" value="tuesday"><label for="tue">TUE</label> 
+
+                                            <input type="checkbox" name="days_days_checkbox" class="col-md-2 chk" id="wed" value="wednesday"><label for="wed">WED</label>
+
+                                            <input type="checkbox" name="days_days_checkbox" class="col-md-2 chk" id="thu" value="thursday"><label for="thu">THU</label>
+
+                                            <input type="checkbox" name="days_days_checkbox" class="col-md-2 chk" id="fri" value="friday"><label for="fri">FRI</label>
+
+                                            <input type="checkbox" name="days_days_checkbox" class="col-md-2 chk" id="sat" value="saturday"><label for="sat">SAT</label>
+                                        </div>
+                                    </div>
+                                </div> Col-md-12 -->
+                            </div><!-- Modal Body -->
+                    </div>
+                </div>
+                     </div>
+                
+            </div>
+                
 
         </div>
 
-        <jsp:include page="parental-control.jsp"/>
+       
 
         <!--  
         <c:if test="${not empty error }">
@@ -764,6 +1199,7 @@
 
         <!-- Load javascripts at bottom, this will reduce page load time -->
     <jsp:include page="component/js.jsp"></jsp:include>
+  
     <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/jquery.min.js" charset="UTF-8"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -826,10 +1262,78 @@
     });
 });
 
-//     End--   AutoComplete Function for URL box
+//Start--Pop up "Add Scheduling" 
+$('#Scheduling_type').on('change', function() {
+
+  switch ($(this).val()) {
+    case 'Weekdays':
+      $('#sc_date_div').slideUp("slow");
+      $('#day_selector').slideDown("slow");
+      $('#sc_time_div').slideDown("slow");
+      $('.chk').prop('disabled', true);
+      $('#mon').prop('checked', true);
+      $('#tue').prop('checked', true);
+      $('#wed').prop('checked', true);
+      $('#thu').prop('checked', true);
+      $('#fri').prop('checked', true);
+      $('#sat').prop('checked', false);
+      $('#sun').prop('checked', false);
+      break;
+    case 'Weekends':
+      $('#sc_date_div').slideUp("slow");
+      $('#day_selector').slideDown("slow");
+      $('#sc_time_div').slideDown("slow");
+      $('.chk').prop('disabled', true);
+      $('#mon').prop('checked', false);
+      $('#tue').prop('checked', false);
+      $('#wed').prop('checked', false);
+      $('#thu').prop('checked', false);
+      $('#fri').prop('checked', false);
+      $('#sat').prop('checked', true);
+      $('#sun').prop('checked', true);
+      break;
+    case 'Daily':
+      $('#sc_date_div').slideUp("slow");
+      $('#day_selector').slideUp("slow");
+      $('#sc_time_div').slideDown("slow");
+
+    break;
+    case 'Custom':
+      $('#sc_date_div').slideUp("slow");
+      $('#day_selector').slideDown("slow");
+      $('#sc_time_div').slideDown("slow");
+      $('.chk').prop('disabled', false);
+      $('#mon').prop('checked', false);
+      $('#tue').prop('checked', false);
+      $('#wed').prop('checked', false);
+      $('#thu').prop('checked', false);
+      $('#fri').prop('checked', false);
+      $('#sat').prop('checked', false);
+      $('#sun').prop('checked', false);
+        
+    break;
+    case 'Non Recurring':
+      $('#sc_date_div').slideDown("slow");
+      $('#day_selector').slideUp("slow");
+      $('#sc_time_div').slideDown("slow");
+    break;
+    default:
+      $('#mon').prop('checked', false);
+      $('#tue').prop('checked', false);
+      $('#wed').prop('checked', false);
+      $('#thu').prop('checked', false);
+      $('#fri').prop('checked', false);
+      $('#sat').prop('checked', false);
+      $('#sun').prop('checked', false);
+    
+  }
+
+});
+
+//End--Pop up "Add Scheduling" 
 
 
-    </script>
+  </script>
 
 
 </body>

@@ -28,6 +28,7 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.JsonObject;
 import com.prodevans.zeno.config.RestConfig;
 import com.prodevans.zeno.dao.ScheduleDAO;
+import com.prodevans.zeno.pojo.ScheduleStatusDetails;
 
 public class ScheduleDAOImpl implements ScheduleDAO 
 {
@@ -338,7 +339,89 @@ public class ScheduleDAOImpl implements ScheduleDAO
         return result1;
         
 	}
-	
-	
+
+
+	@Override
+	public ScheduleStatusDetails getScheduleStatus(String domain_id, String schedule_object)
+	{
+        ResponseEntity<String> person;
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Accept", "application/json");
+        entity = new HttpEntity<>(headers);
+        restTemplate = new RestTemplate();
+        restTemplate.getInterceptors()
+                .add(new BasicAuthorizationInterceptor(RestConfig.USER_NAME, RestConfig.PASSWORD));
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("domain_id", domain_id);
+        params.put("schedule_object", schedule_object);
+
+        person = restTemplate.exchange(RestConfig.SCHEDULE_STATUS, HttpMethod.GET, entity, String.class, params);
+
+        String getbody=person.getBody();
+        
+        JSONObject result = new JSONObject(getbody).getJSONObject("schedule");
+        ScheduleStatusDetails scheduleStatusDetails = new ScheduleStatusDetails();
+        
+        scheduleStatusDetails.setName(result.getString("name"));
+        System.out.println("Name : "+scheduleStatusDetails.getName());
+        
+        if(result.has("non-recurring"))
+        {
+        	String data[] = result.getString("non-recurring").split("-");
+        	String first[] = data[0].split("@");
+        	String second[] = data[1].split("@");
+        	
+        	scheduleStatusDetails.setStart_date(first[0]);
+        	scheduleStatusDetails.setStart_time(first[1]);
+        	
+        	scheduleStatusDetails.setEnd_date(second[0]);
+        	scheduleStatusDetails.setEnd_time(second[1]);
+        	
+        	
+        	/*System.out.println("Start Date : "+scheduleStatusDetails.getStart_date());
+        	System.out.println("Start Time : "+scheduleStatusDetails.getStart_time());
+        	
+        	System.out.println("End Date : "+scheduleStatusDetails.getEnd_date());
+        	System.out.println("End Time : "+scheduleStatusDetails.getEnd_time());*/
+        	
+        	
+        }
+        
+        if(result.has("recurring"))
+        {
+        	JSONArray recurring = new JSONObject(getbody).getJSONObject("schedule").getJSONArray("recurring");
+        	ArrayList<String> when = new ArrayList<String>();
+        	String time_of_day = null;
+        	
+        	JSONObject in = new JSONObject();
+        	
+        	for (Object s : recurring) 
+        	{
+        		
+        		if ( s instanceof JSONObject ) 
+        		{
+        	        in = ((JSONObject)s);
+        	        when.add(in.getString("when"));
+        	        time_of_day = in.getString("time-of-day");
+        	    }
+			}
+        	
+        	String data[] = time_of_day.split("-"); 
+        	scheduleStatusDetails.setWhen(when);
+        	scheduleStatusDetails.setStart_time(data[0]);
+        	scheduleStatusDetails.setEnd_time(data[1]);
+        	
+        	/*
+        	System.out.println("When : "+scheduleStatusDetails.getWhen());
+        	System.out.println("Start Time : "+scheduleStatusDetails.getStart_time());
+        	System.out.println("End Time : "+scheduleStatusDetails.getEnd_time());
+        	*/
+        	
+        }
+                
+        
+        return scheduleStatusDetails;
+		
+	}	
 	
 }

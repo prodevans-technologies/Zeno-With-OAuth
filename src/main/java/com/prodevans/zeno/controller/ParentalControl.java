@@ -15,15 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.prodevans.zeno.dao.impl.RegistrationUserParentalControlImpl;
+import com.prodevans.zeno.dao.impl.ScheduleDAOImpl;
 import com.prodevans.zeno.pojo.CategoryList;
 import com.prodevans.zeno.pojo.ParentalControlDetails;
 import com.prodevans.zeno.pojo.ScheduleDetails;
+import com.prodevans.zeno.pojo.ScheduleStatusDetails;
 import com.prodevans.zeno.pojo.SessionDetails;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,6 +44,9 @@ public class ParentalControl {
 
     @Autowired
     private CategoryListDAOImpl categoryimpl;
+    
+    @Autowired
+    private ScheduleDAOImpl scheduleDAOImpl;
 
     /**
      * Created logger object for the logging.
@@ -114,20 +120,29 @@ public class ParentalControl {
                 //fetching the user details from the session.
                 SessionDetails user = (SessionDetails) session.getAttribute("user");
                 String ip_address = (String) session.getAttribute("user_ip_address");
-                logger.error("ip address : " + ip_address);
+                model.addAttribute("uesr_name", user.getActname());
 
+                ScheduleStatusDetails scheduleStatusDetails = new ScheduleStatusDetails();
+                
                 if(  !ip_address.isEmpty() || ip_address != null)
                 {
                 
 	                
 	                boolean check_ip_result = REGISTER_PROCESS.checkRegistration(user.getActid(), user.getDomid().trim(), ip_address);
-	                if (check_ip_result) {
+	                if (check_ip_result) 
+	                {
 	                    //Return the parental control status/Details.
 	                    //parentalControlDetails = PROTECTION_STATUS.getProtectionDetails(user.getActid(), user.getDomid().trim());
 	                    list = categoryimpl.getCategoryList(user.getActid() + RestConfig.ADVANCED_FILTER, user.getDomid().trim());
 	                    model.addAttribute("CAT", list);
 	
-	                    model.addAttribute("uesr_name", user.getActname());
+	                    System.out.println("Calling schedule status...");
+	                    
+	                    scheduleStatusDetails = scheduleDAOImpl.getScheduleStatus(user.getDomid().trim(), user.getActid().trim()+"_SCHEDULE");
+	                    System.out.println("Surf Safe Scheduling Status  ::  \n"+scheduleStatusDetails.toString()); 
+	                    System.out.println("start time  \n"+scheduleStatusDetails.start_time); 
+	                    model.addAttribute("StatusDetails",scheduleStatusDetails);
+	                    
 	                    //parentalControlDetails.setUser_name(user.getActid());
 	                    //Displaying the list of Adderss objects
 	                } else {
@@ -142,6 +157,7 @@ public class ParentalControl {
 	
 	                            model.addAttribute("ScheduleDetails", new ScheduleDetails());
 	
+	                            
 	                            //parentalControlDetails = PROTECTION_STATUS.getProtectionDetails(user.getActid(), user.getDomid().trim());
 	                            //parentalControlDetails.setUser_name(user.getActid());
 	                            //Displaying the list of Adderss objects
@@ -150,10 +166,10 @@ public class ParentalControl {
 	                            logger.error("IP address is not found ");
 	                        }
 	                    }
-	                    // model.addAttribute("message", "user "+user.getActname()+" is succesfually registered in prental control");
+	                     model.addAttribute("message", "user "+user.getActname()+" is succesfually registered in prental control");
 	                    
 	                }
-	                
+
                 }
 
             } catch (Exception e) {
@@ -197,35 +213,95 @@ public class ParentalControl {
     }
 
     @RequestMapping(value = "/block-categories", method = RequestMethod.POST)
-    public String blockcategories(ModelMap model, HttpSession session, @ModelAttribute(name = "CategoryListDetails") CategoryList categoryList, @RequestParam(name = "category_block", required = false) ArrayList<String> category_allowed) {
+    public String blockcategories(ModelMap model, HttpSession session, @ModelAttribute(name = "CategoryListDetails") CategoryList categoryList, @RequestParam(name = "category_block", required = false) ArrayList<String> category_allowed) 
+    {
         if (session.getAttribute("user") == null) {
             return "redirect:/logout";
-        } else {
-            if (category_allowed == null) {
+        } else 
+        {
+
+            if (category_allowed == null) 
+            {
                 session.setAttribute("blocked_error", "Select Category to UNBLOCK.");
                 return "redirect:/control";
             }
-            categoryList.getBlocked_catogery().removeAll(category_allowed);
-            categoryList.getAllowded_catogery().addAll(category_allowed);
-
-            System.out.println("Blocked List : " + categoryList.getBlocked_catogery());
-            System.out.println("Allowed List : " + categoryList.getAllowded_catogery());
-
+            
             //fetching the user details from the session.
             SessionDetails user = (SessionDetails) session.getAttribute("user");
-
-            if (categoryimpl.updateCategoryList(categoryList.getBlocked_catogery(), categoryList.getAllowded_catogery(), user.getDomid(), user.getActid(), "update_allow")) {
-                session.setAttribute("blocked_error", "Done! Category successfully unblocked.");
-            } else {
-                session.setAttribute("blocked_error", "Oops! Category unblocking failed. Please try again. ");
+            
+            if(performUnblockingCategories(user, categoryList, category_allowed))
+            {
+            	session.setAttribute("blocked_error", "Done! Category successfully unblocked.");
+            	return "redirect:/control";
             }
-
-            return "redirect:/control";
+            else
+            {
+            	session.setAttribute("blocked_error", "Oops! Category unblocking failed. Please try again. ");
+            	return "redirect:/control";
+            }
+            
         }
     }
 
+    private boolean performUnblockingCategories(SessionDetails user, CategoryList categoryList, ArrayList<String> category_allowed )
+    {
+    	categoryList.getBlocked_catogery().removeAll(category_allowed);
+        categoryList.getAllowded_catogery().addAll(category_allowed);
+
+        System.out.println("Blocked List : " + categoryList.getBlocked_catogery());
+        System.out.println("Allowed List : " + categoryList.getAllowded_catogery());
+
+        if (categoryimpl.updateCategoryList(categoryList.getBlocked_catogery(), categoryList.getAllowded_catogery(), user.getDomid(), user.getActid(), "update_allow")) 
+        {
+        	return true;	
+        } 
+        else 
+        {
+        	return false;
+        }
+    	
+    }   
+    
+    
+    @RequestMapping(value = "/block-all-categories", method = RequestMethod.POST)
+    public String blockallcategories(ModelMap model, HttpSession session, @ModelAttribute(name = "CategoryListDetails") CategoryList categoryList) 
+    {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/logout";
+        } 
+        else 
+        {
+        	//fetching the user details from the session.
+            SessionDetails user = (SessionDetails) session.getAttribute("user");
+
+            if(categoryList.getBlocked_catogery().isEmpty())
+            {
+            	session.setAttribute("blocked_error", "Oops! Category unblocking failed. There are no any Categories to Unblock.");
+            	return "redirect:/control";
+            }
+            
+            
+            categoryList.getAllowded_catogery().addAll(categoryList.getBlocked_catogery());
+            categoryList.getBlocked_catogery().removeAll(categoryList.getBlocked_catogery());
+
+            if (categoryimpl.updateCategoryList(categoryList.getBlocked_catogery() , categoryList.getAllowded_catogery(), user.getDomid(), user.getActid(), "update_allow")) 
+            {
+            	session.setAttribute("blocked_error", "Done! Categories successfully unblocked.");
+            	return "redirect:/control";
+            } else 
+            {
+            	session.setAttribute("blocked_error", "Oops! Category unblocking failed. Please try again. ");
+            	return "redirect:/control";
+            }
+
+        }
+    }
+       
+    
+    
     @RequestMapping(value = "/delete-patterns", method = RequestMethod.POST)
-    public String deletepatterns(ModelMap model, HttpSession session, @ModelAttribute(name = "CategoryListDetails") CategoryList categoryList, @RequestParam(name = "filter_category", required = false) ArrayList<String> selected_filter_category) {
+    public String deletepatterns(ModelMap model, HttpSession session, @ModelAttribute(name = "CategoryListDetails") CategoryList categoryList, @RequestParam(name = "filter_category", required = false) ArrayList<String> selected_filter_category) 
+    {
 
         if (session.getAttribute("user") == null) {
             return "redirect:/logout";
@@ -236,6 +312,9 @@ public class ParentalControl {
 
                 return "redirect:/control";
             }
+            
+            System.out.println("URL List : "+categoryList.getRemove_filter_pattern().toString());
+            
             categoryList.getRemove_filter_pattern().removeAll(selected_filter_category);
 
             //fetching the user details from the session.
@@ -250,6 +329,35 @@ public class ParentalControl {
         }
 
     }
+    
+    @RequestMapping(value = "/delete-all-patterns", method = RequestMethod.POST)
+    public String deleteallpatterns(ModelMap model, HttpSession session, @ModelAttribute(name = "CategoryListDetails") CategoryList categoryList)
+    {
+        
+        //fetching the user details from the session.
+        SessionDetails user = (SessionDetails) session.getAttribute("user");
+        
+        if(categoryList.getRemove_filter_pattern().isEmpty())
+        {
+        	session.setAttribute("custom_error", "Oops! URL unblocking failed. There are no any URL's to Unblock.");
+        	return "redirect:/control";
+        }
+        
+        categoryList.getRemove_filter_pattern().clear();
+        
+        if (categoryimpl.updateFilterPattern(categoryList.getRemove_filter_pattern(), user.getDomid(), user.getActid() + RestConfig.ADVANCED_FILTER)) {
+            session.setAttribute("custom_error", "Done! URL's successfully unblocked.");
+        } else {
+            session.setAttribute("custom_error", "Oops! URL unblocking failed. Please try again.");
+        }
+
+        return "redirect:/control"; 
+    }
+    
+    
+    
+    
+    
 
     @RequestMapping(value = "/update-patterns", method = RequestMethod.POST)
     public String updatePatterns(ModelMap model, HttpSession session, @ModelAttribute(name = "CategoryListDetails") CategoryList categoryList, @RequestParam(name = "url_pattern", required = false) String selected_filter_category) {

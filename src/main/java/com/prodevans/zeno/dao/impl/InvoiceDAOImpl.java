@@ -51,6 +51,7 @@ public class InvoiceDAOImpl implements InvoiceDAO
 			invoiceDetails.setEnddt(hs.get("enddt").toString());
 			invoiceDetails.setInvoicedt(hs.get("invoicedt").toString());
 			invoiceDetails.setStartdt(hs.get("startdt").toString());
+			System.out.println("resultcontent"+ hs.get("content").toString());
 			
 		}
 		}catch(Exception ee) {

@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.xmlrpc.XmlRpcException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.prodevans.zeno.dao.impl.ProfileDAOImpl;
 import com.prodevans.zeno.pojo.ChangePassword;
 import com.prodevans.zeno.pojo.ProfileDetails;
+import com.prodevans.zeno.pojo.SendMailDetails;
 import com.prodevans.zeno.pojo.SessionDetails;
 
 @Controller
@@ -56,13 +58,18 @@ public class ProfileController {
 	}
 
 	@RequestMapping(value = "/change-pass", method = RequestMethod.POST)
-	public String ChangePass(@ModelAttribute("change_pass") ChangePassword pass, ModelMap model) {
+	public String ChangePass(ModelMap model, HttpSession session,@ModelAttribute("change_pass") ChangePassword pass) {
 		boolean result = false;
+		boolean result1= false;
 		try {
 
 			if (!pass.getPassword().isEmpty()) {
 				if (pass.getPassword().equals(pass.getConfirm_password())) {
+					SessionDetails user = (SessionDetails) session.getAttribute("user");
 					result = profileImpl.updatePassword(pass.getActid(), pass.getPassword());
+					result1= profileImpl.sentMailChangePassword(user);
+					
+					
 					if (result)
 						model.addAttribute("result", "Password has been changed successfuly");
 					else
@@ -80,5 +87,8 @@ public class ProfileController {
 
 		return "redirect:/profile";
 	}
-
+	
 }
+
+
+

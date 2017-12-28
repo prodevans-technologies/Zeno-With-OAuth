@@ -127,6 +127,7 @@ public class APIController {
 
 		return new_hs;
 	}
+	
 	private String getJson(List<SessionHistory> hs) {
 		JSONObject data = new JSONObject();
 
@@ -217,6 +218,10 @@ public class APIController {
 		}
 
 		data.put("rows", rows);
+		System.out.println("=======================================Data of Usage=================================");
+		System.out.println(data.toString());
+		System.out.println("=======================================Data of Usage=================================");
+		
 		return data.toString();
 	}
 

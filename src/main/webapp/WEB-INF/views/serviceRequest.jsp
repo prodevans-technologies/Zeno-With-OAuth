@@ -88,6 +88,15 @@ background-position:right center;
 }
 */
 
+#myAlert{
+                color: blue;
+                position: absolute;
+               	bottom: 30px;
+                left: 350px;
+                font-size:16px;
+                background-color: #fff;
+                border: 1px #008000 solid;
+         }
 </style>
 
 </head>
@@ -207,7 +216,7 @@ background-position:right center;
         <div class="row">
         	
             <div class="col-md-12">
-            	<form:textarea path="message" id="message" class="form-control" style="height:150px; width: 99%; border: 0.6px solid #d9dde0; resize: none; color: black; border-radius: 0.4px; font-size: 19px;" placeholder=" Tell us more"></form:textarea>
+            	<form:textarea path="message" id="message" class="form-control" required="required" style="height:150px; width: 99%; border: 0.6px solid #d9dde0; resize: none; color: black; border-radius: 0.4px; font-size: 19px;" placeholder=" Tell us more"></form:textarea>
                 
             </div>
             <div class="col-md-12" style="margin-top:3% ;text-align: right;margin-left: -1%;">
@@ -217,10 +226,16 @@ background-position:right center;
     
 </form:form>    
   </div> 
-<h3 style="color:green; text-align: center;"><b>
-<c:if test="${ not empty msg}">${msg}</c:if></b></h3>
-
-
+  
+<!-- pop up message for response message -->
+   <c:if test="${not empty msg }">
+            <div id="myAlert" class="alert alert-danger">
+                <a href="${pageContext.request.contextPath }/service" class="close">&times;</a>
+            <c:out value="${msg }"></c:out>
+            </div>
+        </c:if>
+        
+        
 	<!-- included pop up -->
 	<jsp:include page="component/pop-up.jsp"></jsp:include>
 

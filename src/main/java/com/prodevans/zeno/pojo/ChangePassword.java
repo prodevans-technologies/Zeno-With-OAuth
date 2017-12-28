@@ -4,6 +4,15 @@ public class ChangePassword {
 	private String actid;
 	private String password;
 	private String confirm_password;
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * 
@@ -67,15 +76,17 @@ public class ChangePassword {
 		this.confirm_password = confirm_password;
 	}
 
+	@Override
+	public String toString() {
+		return "ChangePassword [actid=" + actid + ", password=" + password + ", confirm_password=" + confirm_password
+				+ ", name=" + name + "]";
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
-	public String toString() {
-		return "ChangePassword [actid=" + actid + ", password=" + password + ", confirm_password=" + confirm_password
-				+ "]";
-	}
+	
 
 }

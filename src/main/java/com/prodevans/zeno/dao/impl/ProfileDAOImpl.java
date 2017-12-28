@@ -3,11 +3,15 @@ package com.prodevans.zeno.dao.impl;
 import java.util.HashMap;
 import java.util.Vector;
 
+import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.prodevans.zeno.dao.ProfileDAO;
+import com.prodevans.zeno.pojo.ChangePassword;
 import com.prodevans.zeno.pojo.ProfileDetails;
+import com.prodevans.zeno.pojo.SendMailDetails;
+import com.prodevans.zeno.pojo.SessionDetails;
 
 public class ProfileDAOImpl implements ProfileDAO {
 
@@ -51,7 +55,7 @@ public class ProfileDAOImpl implements ProfileDAO {
 			details.setAddress(result.get("address").toString());
 			details.setCityname(result.get("cityname").toString());
 			details.setPassword(result.get("password").toString());
-			System.out.println(details.toString());
+			//System.out.println(details.toString());
 			return details;
 		} else {
 			return null;
@@ -70,5 +74,28 @@ public class ProfileDAOImpl implements ProfileDAO {
 			return false;
 
 	}
+	@Override
+	public Boolean sentMailChangePassword(SessionDetails user) throws XmlRpcException 
+	{
+		
+		Vector params = new Vector();
+		String content = "Hi "+user.getFirst_name()+",\n\nYour account password for account id " +user.getActid()+" has been changed successfully. Log back in with your new password now. If you haven’t initiated this change, please call us at 080-30323000 immediately.\n\nThanks & Regards \nOne8 support ";
+		params.add(content);
+		params.add("Change password");
+		//params.add(""+feedback.getEmail_id());
+		//System.out.println("mail id "+user.getEmail());
+		//System.out.println("mail id "+user.getActid());
+		//System.out.println("mail id "+user.getPassword());
+		params.add("anand.prodevans@gmail.com");
+		params.add(1);
+		
+		Boolean mailResult = (Boolean) rpcClient.execute(unifyHandler + ".sendMail", params);
+		
+		System.out.println("mail send successfully");
+		
+		return mailResult;
+	}
+
+	
 
 }

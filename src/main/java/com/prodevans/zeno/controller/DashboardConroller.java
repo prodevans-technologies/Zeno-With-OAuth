@@ -102,6 +102,57 @@ public class DashboardConroller {
 			return "dashboard";
 		}
 	}
+	
+	@RequestMapping(value = "/dashboards", method = RequestMethod.GET)
+	public String getDashboards(ModelMap model, HttpSession session) {
+
+		if (session.getAttribute("user") == null) {
+			return "redirect:/logout";
+		} else {
+			try {
+				SessionDetails user = (SessionDetails) session.getAttribute("user");
+				System.out.println(user.toString());
+				UserDetails userdetails = DashboardImpl.getUserDetails(user.getActid());
+				RcDetails rcdetails=rcImpl.getrcdetails(user.getActid(), user.isGetClosed(), user.getFromDate(),user.getToDate());
+
+				// for getting invoice details
+				InvoiceDetails invoiceDetails = invoiceDAOImpl.getInvoice(user.getActno());
+				model.addAttribute("invoiceDetails", invoiceDetails);
+
+				model.addAttribute("user_details", user);
+
+				SubscriptionDetails details = DashboardImpl.getSubscriptionDetails(user.getActid());
+				System.out.println("user subscription details : " + details.toString());
+				model.addAttribute("SubscriptionDetails", details);
+				session.setAttribute("plan", details.getRatePlan());
+				session.setAttribute("FUP", details.getFUPLimit());
+
+				session.setAttribute("amount", rcdetails.getAmount());
+				session.setAttribute("brcdesc", rcdetails.getBrcdesc());
+				
+
+                               
+                                //set ip address to the user for the parental control.
+				session.setAttribute("user_ip_address", details.getIp_address());
+                                        
+
+				model.addAttribute("plan", details.getRatePlan());
+				model.addAttribute("FUP", details.getFUPLimit());
+				model.addAttribute("amount",rcdetails.getAmount());
+				model.addAttribute("brcdesc",rcdetails.getBrcdesc());
+
+				/*
+				 * List<SessionHistory> hs = DashboardImpl.getAllSession(details.getStartDate(),
+				 * details.getExpiryDate(), user.getActid());
+				 * model.addAttribute("SessionHistory", hs);
+				 */
+
+			} catch (Exception ee) {
+				ee.printStackTrace();
+			}
+			return "dashboards";
+		}
+	}
 
 	@RequestMapping(value = "/currentplan", method = RequestMethod.GET)
 	public String currentPlan(Locale locale, Model model, HttpSession session) {

@@ -63,6 +63,15 @@
                 {
                     font-weight: 100 !important;
                 }
+                #myAlert{
+                color: blue;
+                position: absolute;
+               	bottom: 30px;
+                left: 350px;
+                font-size:16px;
+                background-color: #fff;
+                border: 1px #008000 solid;
+            }
             </style>
 
         </head>
@@ -128,13 +137,13 @@
                     </div>
                     <div class="col-md-12 pb-40">
                         <div class="col-md-12">
-                            <form:input type="text" path="subject" id="subject"  placeholder="Subject" class="font-h2" style="width:99% !important;" />
+                            <form:input type="text" path="subject" id="subject" required="required"  placeholder="Subject" class="font-h2" style="width:99% !important;" />
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="col-md-12 ">
 
-                            <form:textarea path="message" id="message" 
+                            <form:textarea path="message" id="message"  required="required"
                                            style="height:150px; width: 99%; border: 0.6px solid #bdc3c7; resize: none; color: black; border-radius: 0.4px; font-size: 19px;"
                                            placeholder=" Message"></form:textarea>
                             </div>
@@ -148,10 +157,15 @@
 
         </div>
 
-        <h3 style="color:green; text-align: center;"><b>
-                <c:if test="${ not empty msg}">${msg}</c:if></b></h3>
-
-
+		<!-- pop up message for response message -->
+		
+		<c:if test="${not empty msg }">
+            <div id="myAlert" class="alert alert-danger">
+                <a href="${pageContext.request.contextPath }/contactusPage" class="close">&times;</a>
+            <c:out value="${msg }"></c:out>
+            </div>
+        </c:if>
+        
             <!-- included pop up -->
         <jsp:include page="component/pop-up.jsp"></jsp:include>
 
@@ -176,7 +190,9 @@
             <!-- Load javascripts at bottom, this will reduce page load time -->
         <jsp:include page="component/js.jsp"></jsp:include>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8lEpXR-Ni1-PLpVrs3V4ofgmKyK6OwYI&callback=initMap"></script> 
-
+        
+        
+        
         <style>
             body{
                 font-weight: 300;
